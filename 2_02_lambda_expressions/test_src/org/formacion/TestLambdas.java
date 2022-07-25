@@ -1,6 +1,7 @@
 package org.formacion;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 

@@ -1,6 +1,10 @@
 package org.formacion;
 
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * El ejercicio consiste en implementar los metodos de tal forma que 
  * devuelvan una lambda expression que implementen la interface declarada
@@ -25,12 +29,12 @@ public class LambdasFactory {
 	
 	/** Devuelve una implemtacion de constante que siempre devuelve 5 */
 	public Constante devuelve5() {
-		return null;
+		return () -> 5;
 	}
 
 	/** Devuelve una implementacion de Operador con el metodo de suma de dos enteros */
 	public Operador obtenSumador() {
-		return null;
+		return Integer::sum;
 	}
 	
 	/** 
@@ -40,7 +44,7 @@ public class LambdasFactory {
 	 * seguno parametro del metodo incializa
 	 */
 	public InicializadorArrays obtenInicializador() {
-		return null;
+		return Arrays::fill;
 	}
 	
 }
