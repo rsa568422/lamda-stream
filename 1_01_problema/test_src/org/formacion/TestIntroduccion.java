@@ -21,12 +21,11 @@ public class TestIntroduccion {
 		// segun la longitud de MAYOR a MENOR (es decir, al contrario que el ejemplo de
 		// la presentacion.
 		// * solo debes modificar la siguiente linea, el resto de codigo debe quedar igual *
-		Comparator<String> comparadorLongitud = null;
+		Comparator<String> comparadorLongitud = (a, b) -> b.length() - a.length();
 
 		assertNotNull("No has creado aun el comparador",comparadorLongitud);
 		
 		Collections.sort(nombres,comparadorLongitud);
-	
 	
 		assertEquals("El primer elemento deberia ser Antonia", "Antonia", nombres.get(0));
 		assertEquals("El segundo elemnento deberia ser Pedro", "Pedro", nombres.get(1));
