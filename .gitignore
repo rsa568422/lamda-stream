@@ -1,1 +1,10 @@
 /.metadata/
+/.idea/
+/1_01_problema/bin/
+/1_02_default_methods/bin/
+/2_02_lambda_expressions/bin/
+/3_01_jdk_functional_interfaces/bin/
+/3_03_optional/bin/
+/4_02_streams_pipeline/bin/
+/4_04_reducciones_mutables/bin/
+/5_01_collections/bin/
