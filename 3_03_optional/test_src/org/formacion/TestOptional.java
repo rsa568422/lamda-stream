@@ -19,7 +19,7 @@ public class TestOptional {
 		Vivienda vivienda = new Vivienda("Casa mayor");
 		
 		assertNotNull(vivienda.getPropietario());
-		assertTrue(! vivienda.getPropietario().isPresent());
+		assertFalse(vivienda.getPropietario().isPresent());
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public class TestOptional {
 		
 		assertNotNull(vivienda.getPropietario());
 		assertTrue(vivienda.getPropietario().isPresent());
-		assertTrue(vivienda.getPropietario().get().getNombre().equals("Antonia"));
+		assertEquals("Antonia", vivienda.getPropietario().get().getNombre());
 	}
 	
 	/**
