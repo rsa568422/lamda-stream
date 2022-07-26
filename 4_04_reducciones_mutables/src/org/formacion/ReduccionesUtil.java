@@ -1,8 +1,7 @@
 package org.formacion;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Para las soluciones de estos ejercicios utiliza streams, las 
@@ -22,7 +21,11 @@ public class ReduccionesUtil {
 	 */
 	public Collection<String> obtenSinNulosYMayusculas(List<String> original) {
 		
-		return null;
+		return original
+				.stream()
+				.filter(Objects::nonNull)
+				.map(String::toUpperCase)
+				.collect(Collectors.toCollection(LinkedList::new));
 	}
 
 	/**
@@ -39,8 +42,10 @@ public class ReduccionesUtil {
 		 * y en la posicion 1 el recuento de impares
 		 */
 		int[] acumular = {0,0};
-		
-		
+
+		acumular[0] = (int) numeros.stream().filter(numero -> numero % 2 == 0).count();
+		acumular[1] = (int) numeros.stream().filter(numero -> numero % 2 != 0).count();
+
 		return acumular;
 		
 	}
