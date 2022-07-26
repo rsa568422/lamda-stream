@@ -2,11 +2,7 @@ package org.formacion;
 
 import static org.junit.Assert.*;
 
-import java.util.function.BiPredicate;
-import java.util.function.IntUnaryOperator;
-import java.util.function.LongBinaryOperator;
-import java.util.function.Predicate;
-import java.util.function.UnaryOperator;
+import java.util.function.*;
 
 import org.junit.Test;
 
@@ -20,7 +16,7 @@ public class TestLambdas {
 	@Test
 	public void test_function() {
 		
-		IntUnaryOperator cuadrado = null;
+		IntUnaryOperator cuadrado = x -> x * x;
 		
 		assertEquals(0, cuadrado.applyAsInt(0));
 		assertEquals(1, cuadrado.applyAsInt(1));
@@ -35,7 +31,7 @@ public class TestLambdas {
 	@Test
 	public void test_funcion_2() {
 		
-		LongBinaryOperator menor = null;
+		LongBinaryOperator menor = Math::min;
 		
 		assertEquals(-2, menor.applyAsLong(-2, 3));
 		assertEquals(5, menor.applyAsLong(10, 5));
@@ -60,32 +56,43 @@ public class TestLambdas {
 		Persona personaNoPariente = new Persona ("nombre","otro","otro");
 		
 		// Cread una funcion que indique si el segundo apellido de una persona es null
-		
+		Predicate<Persona> segundoApellidoNull = (Persona a) -> a.getApellido2() == null;
+		assertTrue(segundoApellidoNull.test(personaSinSegundoApellido));
+		assertFalse(segundoApellidoNull.test(personaConSegundoApellido));
+
 		// Una funcion que nos diga si dos personas son parientes: para nosotros parientes
 		// son personas con el mismo primer apellido
-		
+		BiFunction<Persona, Persona, Boolean> parientes = (a, b) -> a.getApellido1().equals(b.getApellido1());
+		assertTrue(parientes.apply(personaConSegundoApellido, personaSinSegundoApellido));
+		assertFalse(parientes.apply(personaConSegundoApellido, personaNoPariente));
+
 		// Una funcion que "enmascare" los datos de una persona: debe permutar los valores de sus
 		// y nombre
+		Function<Persona, Persona> enmascarar = (Persona a) -> new Persona(a.getApellido1(), a.getApellido2(), a.getNombre());
+		assertEquals(personaConSegundoApellido.getNombre(), enmascarar.apply(personaConSegundoApellido).getApellido2());
+		assertEquals(personaConSegundoApellido.getApellido1(), enmascarar.apply(personaConSegundoApellido).getNombre());
+		assertEquals(personaConSegundoApellido.getApellido2(), enmascarar.apply(personaConSegundoApellido).getApellido1());
+
 	}
 	
 	
 	@Test
 	public void test_validadores() {
-		
+
 		/**
 		 * Modificad la clase validador conforme las instrucciones que encontrareis ahi
-		 *      
-		 * Hecho esto, descomentad el codigo que sigue (que, con vuestros cambios en Validador deberia 
+		 *
+		 * Hecho esto, descomentad el codigo que sigue (que, con vuestros cambios en Validador deberia
 		 * compilar excepto por el contenido en la invocacion al metodo add.
-		 * Como parametro al metodo add debereis pasar una expresion que produzca el tipo de funcion que 
+		 * Como parametro al metodo add debereis pasar una expresion que produzca el tipo de funcion que
 		 * hayais decidido que usa la clase Validador
 		 */
-		//Validador<Persona> validador = new Validador<Persona>();
+		Validador<Persona> validador = new Validador<>();
 		
-		//validador.add(/* pasar un predicado que mire si el primer apellido es null */ );
+		validador.add((Persona a) -> a.getApellido1() != null);
 		
-		//assertTrue(validador.valida(new Persona("nombre","ape1","ape2")));
-		//assertFalse(validador.valida(new Persona("nombre",null,"ape2")));
+		assertTrue(validador.valida(new Persona("nombre","ape1","ape2")));
+		assertFalse(validador.valida(new Persona("nombre",null,"ape2")));
 
 	}
 	

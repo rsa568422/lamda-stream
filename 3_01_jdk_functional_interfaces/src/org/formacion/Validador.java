@@ -2,6 +2,7 @@ package org.formacion;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 /**
  * El objetivo de esta clase es validar que objetos del tipo T cumplen unos determinados requisitos.
@@ -21,12 +22,15 @@ import java.util.ArrayList;
 public class Validador <T> {
 
 	// falta indicar el tipo de List
-	List validadores = new ArrayList<>();
+	List<Predicate<T>> validadores = new ArrayList<>();
 	
-	public boolean valida(Object valor) { // cambiar Object por el tipo adecuado
-	   // true si pasa todos los validadores, falso si no
-		return true;
+	public boolean valida(T valor) { // cambiar Object por el tipo adecuado
+	    // true si pasa todos los validadores, falso si no
+		return this.validadores.stream().map(validador -> validador.test(valor)).reduce(true, Boolean::logicalAnd);
 	}
 	
 	// falta un metodo add que admite nuevas validaciones
+	void add(Predicate<T> validador) {
+		this.validadores.add(validador);
+	}
 }
