@@ -1,7 +1,8 @@
 package org.formacion;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CollectionUtil {
 
@@ -10,6 +11,7 @@ public class CollectionUtil {
 	 * tengan un nombre con un espacio en blanco 
 	 */
 	public void eliminaNombresConEspacios(List<Persona> original) {
+		original.removeIf(persona -> persona.getNombre().contains(" "));
 	}
 	
 	/**
@@ -17,6 +19,11 @@ public class CollectionUtil {
 	 * Id con cuidado con el segundo apellido, que es optional!
 	 */
 	public void pasarAMayusculas (List<Persona> original) {
+		original.replaceAll(persona -> new Persona(
+				persona.getNombre().toUpperCase(),
+				persona.getApellido1().toUpperCase(),
+				persona.getApellido2().map(String::toUpperCase)
+		));
 	}
 	
 	
@@ -28,6 +35,8 @@ public class CollectionUtil {
 	 * El metodo debe devolver "prod1:4,prod2:5," 
 	 */
 	public String aTexto (Map<String, Integer> factura) {
-		return "";
+		StringBuilder sb = new StringBuilder();
+		factura.forEach((key, value) -> sb.append(String.format("%s:%d,", key, value)));
+		return sb.toString();
 	}
 }
