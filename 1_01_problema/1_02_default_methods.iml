@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../1_02_default_methods">
+      <sourceFolder url="file://$MODULE_DIR$/../1_02_default_methods/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../1_02_default_methods/test_src" isTestSource="true" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
