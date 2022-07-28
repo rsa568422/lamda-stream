@@ -8,3 +8,5 @@
 /4_02_streams_pipeline/bin/
 /4_04_reducciones_mutables/bin/
 /5_01_collections/bin/
+*.iml
+/1_01_problema/bin/*.eml
